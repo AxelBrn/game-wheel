@@ -2,20 +2,18 @@
   <div id="main">
       <div class="top-bar">
           <div class="side">
-
+              Roulette.io
           </div>
           <div class="side" style="margin-right: 7px">
-              <div class="button green" @click="minimizeApp">
-
-              </div>
-              <div class="button yellow">
-                  
-              </div>
+              <div class="button green" @click="minimizeApp" />
+              <div class="button yellow" />
               <div class="button red" @click="closeApp" />
           </div>
       </div>
       <div class="image">
-          <router-view class="content"/>
+          <div class="content">
+              <router-view />
+          </div>
       </div>
   </div>
 </template>
@@ -54,9 +52,10 @@ export default {
     .top-bar {
         -webkit-app-region: drag;
         display: flex;
-        width: 100%;
+        width: auto;
         background-color: #21252b;
         flex-direction: row;
+        border-radius: 10px 10px 0 0;
     }
     .content { 
         -webkit-app-region: no-drag;
@@ -106,6 +105,7 @@ export default {
     }
     .image {
         background-image: url('../assets/background.png');
+        border-radius: 0 0 10px 10px;
     }
     .icon {
         height: 10px;

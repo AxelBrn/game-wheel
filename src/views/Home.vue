@@ -9,6 +9,7 @@
 import Wheel from '@/components/Wheel'
 
 export default {
+  path: '/',
   name: 'Home',
   components: {
     Wheel

@@ -5,15 +5,13 @@
 
           </div>
           <div class="side" style="margin-right: 7px">
-              <div class="button green">
+              <div class="button green" @click="minimizeApp">
 
               </div>
               <div class="button yellow">
                   
               </div>
-              <div class="button red">
-                  
-              </div>
+              <div class="button red" @click="closeApp" />
           </div>
       </div>
       <div class="image">
@@ -23,7 +21,25 @@
 </template>
 
 <script>
+import { ipcRenderer } from 'electron'
+
 export default {
+  data: () => {
+    return {
+      close: false
+    }
+  },
+  methods: {
+    isCloseFocus: function () {
+        this.close = !this.close
+    },
+    closeApp: function () {
+        ipcRenderer.send('close-me')
+    },
+    minimizeApp: function () {
+        ipcRenderer.send('minimize-me')
+    }
+  }
 
 }
 </script>
@@ -57,14 +73,27 @@ export default {
         align-items: center;
     }
     .button {
+        -webkit-app-region: no-drag;
+        display: flex;
         width: 16px;
         height: 16px;
+        justify-content: center;
+        align-items: center;
         border-radius: 8px;
         margin-left: 10px;
         margin-right: 2px;
+        background-size: 10px;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+    .button:hover {
+        cursor:pointer;
     }
     .red {
         background-color: #F04A62;
+    }
+    .red:hover {
+        background-image: url('../assets/close.png');
     }
     .yellow {
         background-color: #AA47BC;
@@ -72,7 +101,14 @@ export default {
     .green {
         background-color: #5C6BC0;
     }
+    .green:hover {
+        background-image: url('../assets/minimize.png');
+    }
     .image {
         background-image: url('../assets/background.png');
+    }
+    .icon {
+        height: 10px;
+        width: 10px;
     }
 </style>

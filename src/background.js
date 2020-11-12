@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
@@ -79,3 +79,11 @@ if (isDevelopment) {
     })
   }
 }
+
+ipcMain.on('close-me', () => {
+  app.exit(0)
+})
+
+ipcMain.on('minimize-me', () => {
+  BrowserWindow.getFocusedWindow().minimize()
+})
